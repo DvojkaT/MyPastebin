@@ -15,4 +15,28 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
+})->name('newpasta');
+
+Route::get('/register', function () {
+    return view('register');
+})->name('register');
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
+Route::post('/submit', function() {
+    return "OK";
+})->name('submitpasta');
+
+Route::post('/register/submit', function() {
+    return "Registered";
+})->name('submitregister');
+
+Route::post('/login/submit', function(){
+    return "Succesfull login";
+})->name('submitlogin');
+
+Route::fallback(function () {
+    return view('wrongpage');
 });
