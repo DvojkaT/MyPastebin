@@ -9,7 +9,7 @@
         <li class="nav-item"><a href="{{route('login')}}" class="nav-link">Вход</a></li>
         <li class="nav-item"><a href="{{route('register')}}" class="nav-link">Регистрация</a></li>
         @else
-        <li class="nav-item"><a href="{{route('login')}}" class="nav-link">Выход</a></li>
+        <li class="nav-item"><a href="{{route('logout')}}" class="nav-link">Выход</a></li>
         <li class="nav-item"><a href="{{route('mypastes')}}" class="nav-link">Мои пасты</a></li>
         @endif
         <li class="nav-item"><a href="{{route('home')}}" class="nav-link active" aria-current="page">Создать пасту</a></li>

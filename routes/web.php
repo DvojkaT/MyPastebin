@@ -38,6 +38,8 @@ Route::get('/user/login', function () {
 
 Route::post('/user/login/submit', [LoginController::class, 'authenticate'])->name('submitlogin');
 
+Route::get('/user/logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::fallback(function () {
     return view('wrongpage');
 });
