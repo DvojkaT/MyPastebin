@@ -16,6 +16,7 @@ class paste extends Model
     {
         $paste = new paste;
         $paste->code = $request->get('code');
+        $paste->name = $request->get('pastename');
         $paste->hash = Uuid::uuid4()->toString();
 
         $paste->save();

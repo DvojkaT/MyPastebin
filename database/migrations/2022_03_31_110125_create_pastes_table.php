@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('pastes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Name');
-            $table->string('Permission');
+            $table->string('name');
+            $table->string('permission')->default('public');
             $table->integer('author_id')->nullable();
             $table->text('code');
             $table->string('hash');
