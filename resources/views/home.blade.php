@@ -7,11 +7,11 @@
 @section('content')
 <h1>Создать пасту</h1>
 
-<form action="{{ route('submitpasta') }}" method="post">
+<form action="{{ route('home') }}" method="post">
     @csrf
     <div class="form-group">
-        <label for="pasta">Новая паста</label>
-        <textarea rows="10" name="pasta" placeholder="Введите пасту" id="pasta" class="form-control"></textarea>
+        <label for="code">Новая паста</label>
+        <textarea rows="10" name="code" placeholder="Введите пасту" id="code" class="form-control">{{ optional($paste ?? null)->code }}</textarea>
     </div>
     <div>
     <label for="empty"></label>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PastesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('newpasta');
+Route::view('/', 'home')->name('home');
 
 Route::get('/register', function () {
     return view('register');
@@ -25,17 +24,8 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-Route::post('/submit', function() {
-    return "OK";
-})->name('submitpasta');
-
-Route::post('/register/submit', function() {
-    return "Registered";
-})->name('submitregister');
-
-Route::post('/login/submit', function(){
-    return "Succesfull login";
-})->name('submitlogin');
+Route::post('/', [PastesController::class, 'post']);
+Route::get('{hash}', [PastesController::class, 'show'])->name('show');
 
 Route::fallback(function () {
     return view('wrongpage');

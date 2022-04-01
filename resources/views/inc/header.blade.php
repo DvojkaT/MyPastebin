@@ -5,8 +5,12 @@
       </a>
 
       <ul class="nav nav-pills">
+        @if(Auth::check())
         <li class="nav-item"><a href="{{route('login')}}" class="nav-link">Вход</a></li>
         <li class="nav-item"><a href="{{route('register')}}" class="nav-link">Регистрация</a></li>
-        <li class="nav-item"><a href="{{route('newpasta')}}" class="nav-link active" aria-current="page">Создать пасту</a></li>
+        @else
+        <li class="nav-item"><a href="{{route('login')}}" class="nav-link">Выход</a></li>
+        @endif
+        <li class="nav-item"><a href="{{route('home')}}" class="nav-link active" aria-current="page">Создать пасту</a></li>
       </ul>
     </header>
