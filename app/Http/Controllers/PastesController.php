@@ -19,6 +19,7 @@ class PastesController extends Controller
         $paste = new paste;
         $paste->code = DB::table('pastes')->where('hash', '=', $hash)->value('code');
         $paste->name = DB::table('pastes')->where('hash', '=', $hash)->value('name');
+        $paste->author_id = DB::table('pastes')->where('hash', '=', $hash)->value('author_id');
         return view('show', ['data'=>$paste]);
     }
 }
