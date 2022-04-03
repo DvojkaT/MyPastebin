@@ -15,16 +15,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function() {
-    return view('home');
-})->name('home');
+Route::get('/', [PastesController::class, 'publicPastes'])->name('home');
 Route::post('/', [PastesController::class, 'post']);
+
 Route::get('/{hash}', [PastesController::class, 'show'])->name('show');
 
-Route::get('/mypastes', function(){
-    return view('mypastes');
-})->name('mypastes');
+Route::get('/user/mypastes', [PastesController::class, 'myPastes'])->name('mypastes');
 
 Route::get('/user/register', function() {
     return view('Auth.register');

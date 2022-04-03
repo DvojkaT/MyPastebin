@@ -1,12 +1,12 @@
-@extends('layouts.main')
+@extends('layouts.mainForLogged')
 
 @section('title')
     MyPastebin
 @endsection
 
+
 @section('content')
 <h1>Создать пасту</h1>
-
 <form action="{{ route('home') }}" method="post">
     @csrf
     <div class="form-group"> <!--Поле для создания пасты-->
@@ -44,5 +44,4 @@
         <button type="submit" class="btn btn-primary">Создать пасту</button>
     </div>
 </form>
-
 @endsection

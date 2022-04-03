@@ -1,9 +1,18 @@
-@extend('layouts.main');
+@extends('layouts.mainForLogged')
 
 @section('title')
 Мои пасты
 @endsection
 
 @section('content')
-<h1>Здесь будут пасты пользователя</h1>
+<h4>Мои пасты:</h4>
+         @foreach($paste as $data)
+            <div class="alert alert-info">
+                <h3><a href="{{route('show', $data->hash)}}">{{ $data->name }}</a></h3>
+                <p>{{ $data->created_at }}</p>
+            </div>
+        @endforeach
+<div class="d-flex justify-content-center">
+    {{$paste->links()}}
+</div>
 @endsection

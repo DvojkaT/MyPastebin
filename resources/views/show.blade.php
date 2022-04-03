@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.mainForLogged')
 
 @section('title')
 show
