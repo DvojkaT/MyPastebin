@@ -23,7 +23,7 @@ class PastesController extends Controller
         $paste->name = DB::table('pastes')->where('hash', '=', $hash)->value('name');
         $paste->author_id = DB::table('pastes')->where('hash', '=', $hash)->value('author_id');
         $publicPaste = paste::where('permission', '=' , 'public')->latest()->paginate(5);
-        $privatePaste = paste::where('permission', '=' , 'public')->latest()->paginate(5);
+        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(5);
         return view('show', ['data'=>$paste, 'publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste]);
     }
 
@@ -31,7 +31,7 @@ class PastesController extends Controller
     {
         $publicPaste = paste::where('permission', '=' , 'public')->latest()->paginate(5);
         $paste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(5);
-        $privatePaste = paste::where('permission', '=' , 'public')->latest()->paginate(5);
+        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(5);
         return view('mypastes', ['paste'=>$paste, 'publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste]);
     }
 
