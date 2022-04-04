@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('permission')->default('public');
             $table->integer('author_id')->nullable();
             $table->text('code');
+            $table->dateTime('expiration_date')->nullable();
             $table->string('hash');
             $table->timestamps();
         });
