@@ -49,6 +49,16 @@
         <option value="">Без ограничения</option>
       </select>
     </div>
+    <div class="col-auto my-1">
+      <label class="mr-sm-2" for="">Язык пасты: </label>
+      <select name="language" class="form-control" id="language">
+        <option value="" selected>(необязательно)</option>
+        <option value="php">PHP</option>
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="c++">C++</option>
+      </select>
+    </div>
     <div>
     <label for="empty"></label>
     </div>

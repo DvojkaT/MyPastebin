@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('code');
             $table->dateTime('expiration_date')->nullable();
             $table->string('hash');
+            $table->string('language')->nullable();
             $table->timestamps();
         });
     }

@@ -12,7 +12,5 @@
                 <p>{{ $data->created_at }}</p>
             </div>
         @endforeach
-<div class="d-flex justify-content-center">
     {{$paste->links()}}
-</div>
 @endsection

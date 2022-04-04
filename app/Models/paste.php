@@ -24,6 +24,7 @@ class paste extends Model
         $paste->author_id = Auth::id();
         $paste->permission = $request->get('permission');
         $paste->expiration_date = Carbon::now()->addMinutes($request->get('expiration_date'));
+        $paste->language = $request->get('language');
 
         $paste->save();
 
