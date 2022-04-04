@@ -5,6 +5,17 @@
 @endsection
 
 @section('content')
+
+@if($errors->any())
+<div class="aler alert-danger">
+    <ul>
+        @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 <h1>Вход</h1>
 
 <form action="{{ route('submitlogin') }}" method="post">

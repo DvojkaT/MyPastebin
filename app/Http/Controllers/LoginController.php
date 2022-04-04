@@ -19,6 +19,10 @@ class LoginController extends Controller
 
             return redirect()->route('home');
         }
+        else
+        {
+            return redirect()->back()->withErrors(['Неверные данные!']);
+        }
     }
 
     public function logout()
