@@ -34,8 +34,8 @@ class PastesController extends Controller
         }
         $paste->name = DB::table('pastes')->where('hash', '=', $hash)->value('name');
         $paste->author_id = DB::table('pastes')->where('hash', '=', $hash)->value('author_id');
-        $publicPaste = paste::where('permission', '=' , 'public')->latest()->paginate(5);
-        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(5);
+        $publicPaste = paste::where('permission', '=' , 'public')->latest()->paginate(10);
+        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(10);
 
         if(!DB::table('pastes')->where('hash', '=', $hash)->exists())
         {
@@ -53,22 +53,22 @@ class PastesController extends Controller
 
     public function myPastes()
     {
-        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(5);
-        $publicPaste = paste::where('permission', '=' , 'public')->latest()->paginate(5);
+        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(10);
+        $publicPaste = paste::where('permission', '=' , 'public')->latest()->paginate(10);
 
-        $paste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(5);
+        $paste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(10);
         return view('mypastes', ['paste'=>$paste, 'publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste]);
     }
 
     public function publicPastes()
     {
-        $publicPaste = paste::where('permission', '=' , 'public')->latest()->paginate(5);
-        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(5);
+        $publicPaste = paste::where('permission', '=' , 'public')->latest()->paginate(10);
+        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(10);
         return view('home', ['publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste]);
     }
     public function privatePastes()
     {
-        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(5);
+        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(10);
         return view('home', compact('privatePaste'));
     }
 
