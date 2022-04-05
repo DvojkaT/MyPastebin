@@ -7,7 +7,7 @@
 
 @section('content')
 <h1>Создать пасту</h1>
-
+<!--Блок с ошибками-->
 @if($errors->any())
 <div class="aler alert-danger">
     <ul>
@@ -16,6 +16,10 @@
         @endforeach
     </ul>
 </div>
+@endif
+<!--Блок для сообщений-->
+@if (Session::has('message'))
+   <div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif
 
 <form action="{{ route('home') }}" method="post">
