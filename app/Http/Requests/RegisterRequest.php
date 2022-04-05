@@ -26,7 +26,7 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|unique:users|email',
-            'password' =>'required'
+            'password' =>'required|min:5'
         ];
     }
     public function messages()
@@ -36,6 +36,7 @@ class RegisterRequest extends FormRequest
             'email.required' => 'Поле "Почта" является обязательным',
             'password.required' => 'Поле "Пароль" является обязательным',
             'email.unique' => 'Данная почта уже занята',
+            'password.min' => 'Пароль должен быть не менее 5 символов'
         ];
     }
 }

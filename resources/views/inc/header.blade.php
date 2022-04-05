@@ -3,7 +3,7 @@
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
         <span class="fs-4">abobus pastebin</span>
       </a>
-
+      
       <ul class="nav nav-pills">
         @if(!Auth::check())
         <li class="nav-item"><a href="{{route('login')}}" class="nav-link">Вход</a></li>

@@ -12,5 +12,5 @@
                 <p>{{ $data->created_at }}</p>
             </div>
         @endforeach
-    {{$paste->links()}}
+{{$paste->links("pagination::bootstrap-4")}}
 @endsection
