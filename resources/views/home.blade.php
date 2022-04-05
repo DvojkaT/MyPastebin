@@ -7,6 +7,17 @@
 
 @section('content')
 <h1>Создать пасту</h1>
+
+@if($errors->any())
+<div class="aler alert-danger">
+    <ul>
+        @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 <form action="{{ route('home') }}" method="post">
     @csrf
     <div class="form-group"> <!--Поле для создания пасты-->

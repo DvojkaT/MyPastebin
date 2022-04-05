@@ -1,4 +1,4 @@
-@extends('layouts.mainForLogged')
+@extends('layouts.mainForMyPastes')
 
 @section('title')
 Мои пасты

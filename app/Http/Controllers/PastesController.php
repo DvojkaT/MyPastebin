@@ -37,9 +37,14 @@ class PastesController extends Controller
         $publicPaste = paste::where('permission', '=' , 'public')->latest()->paginate(5);
         $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(5);
 
+        if(!DB::table('pastes')->where('hash', '=', $hash)->exists())
+        {
+            return view('home', ['publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste])->withErrors(['Данная паста либо была удалена, либо не существует']);
+        }
+
         $pastePrivacyCheck = DB::table('pastes')->where('hash', '=', $hash)->value('permission');
         if($pastePrivacyCheck == "private" && $paste->author_id <> Auth::id()){
-            return "Данная паста приватная и вам недоступна";
+            return view('home', ['publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste])->withErrors(['Паста на которую вы пытались зайти приватная']);
         }
         if($paste->language <> ""){ return view('show', ['hcode'=>$highlighted, 'data'=>$paste, 'publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste]);}
         else return view('show', ['hcode'=>$paste, 'data'=>$paste, 'publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste]);

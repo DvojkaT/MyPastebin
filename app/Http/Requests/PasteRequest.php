@@ -25,6 +25,15 @@ class PasteRequest extends FormRequest
     {
         return [
             'code' => 'required',
+            'pastename' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'code.required' => 'Поле пасты обязательно',
+            'pastename.required' => 'Поле "Имя" является обязательным',
         ];
     }
 }
