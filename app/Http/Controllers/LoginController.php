@@ -15,7 +15,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $req->session()->regenerate();
 
-            return redirect()->route('home')->with('message', 'Выход выполнен успешно!');
+            return redirect()->route('home')->with('message', 'Вход выполнен успешно!');
         }
         else
         {

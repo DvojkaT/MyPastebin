@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [PastesController::class, 'publicPastes'])->name('home');
+Route::get('/', [PastesController::class, 'homePastes'])->name('home');
 Route::post('/', [PastesController::class, 'post']);
 
 Route::get('/{hash}', [PastesController::class, 'show'])->name('show');

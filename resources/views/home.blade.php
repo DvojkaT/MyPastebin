@@ -7,7 +7,7 @@
 
 @section('content')
 <h1>Создать пасту</h1>
-<!--Блок с ошибками-->
+{{-- Блок с ошибками --}}
 @if($errors->any())
 <div class="aler alert-danger">
     <ul>
@@ -17,7 +17,7 @@
     </ul>
 </div>
 @endif
-<!--Блок для сообщений-->
+{{-- Блок для сообщений --}}
 @if (Session::has('message'))
    <div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif
@@ -37,8 +37,8 @@
             <input type="text" name="pastename" placeholder="Введите имя пасты" id="pastename" class="form-control"></input>
         </div>
     </div>
-    <!--Поле для выбора приватности пасты в случае если пользователь
-    зарегестрирован или нет-->
+    {{-- Поле для выбора приватности пасты в случае если пользователь
+    зарегестрирован или нет --}}
     <div class="col-auto my-1">
       <label class="mr-sm-2" for="">Приватность пасты: </label>
       <select name="permission" class="form-control" id="permission">

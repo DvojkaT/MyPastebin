@@ -19,57 +19,40 @@ class PastesController extends Controller
 
     public function show($hash)
     {
-        $paste = new paste;
-        $paste->language = DB::table('pastes')->where('hash', '=', $hash)->value('language');
-        if($paste->language <> "")
+        $publicPaste = Paste::where('permission', '=' , 'public')->latest()->take(10)->get();
+        $privatePaste = Paste::where('author_id', '=' , Auth::id())->latest()->take(10)->get();
+
+        if(!$paste = Paste::query()->where('hash', '=', $hash)->first(['language', 'code', 'name', 'author_id', 'permission']))
+        return view('home', ['publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste])->withErrors(['Данная паста либо была удалена, либо не существует']);
+
+        if($paste->language != "")
         {
             $highlighter = new highlighter();
-            $paste->code = DB::table('pastes')->where('hash', '=', $hash)->value('code');
             $highlighted = $highlighter->highlight($paste->language, $paste->code);
             $paste->code = "";
         }
-        else
-        {
-            $paste->code = DB::table('pastes')->where('hash', '=', $hash)->value('code');
-        }
-        $paste->name = DB::table('pastes')->where('hash', '=', $hash)->value('name');
-        $paste->author_id = DB::table('pastes')->where('hash', '=', $hash)->value('author_id');
-        $publicPaste = paste::where('permission', '=' , 'public')->latest()->paginate(10);
-        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(10);
 
-        if(!DB::table('pastes')->where('hash', '=', $hash)->exists())
-        {
-            return view('home', ['publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste])->withErrors(['Данная паста либо была удалена, либо не существует']);
-        }
-
-        $pastePrivacyCheck = DB::table('pastes')->where('hash', '=', $hash)->value('permission');
-        if($pastePrivacyCheck == "private" && $paste->author_id <> Auth::id()){
+        if($paste->permission == "private" && $paste->author_id != Auth::id()){
             return view('home', ['publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste])->withErrors(['Паста на которую вы пытались зайти приватная']);
         }
-        if($paste->language <> ""){ return view('show', ['hcode'=>$highlighted, 'data'=>$paste, 'publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste]);}
+        if($paste->language != ""){ return view('show', ['hcode'=>$highlighted, 'data'=>$paste, 'publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste]);}
         else return view('show', ['hcode'=>$paste, 'data'=>$paste, 'publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste]);
         
     }
 
     public function myPastes()
     {
-        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(10);
-        $publicPaste = paste::where('permission', '=' , 'public')->latest()->paginate(10);
+        $publicPaste = Paste::where('permission', '=' , 'public')->latest()->take(10)->get();
 
-        $paste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(10);
-        return view('mypastes', ['paste'=>$paste, 'publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste]);
+        $paste = Paste::where('author_id', '=' , Auth::id())->latest()->paginate(10);
+        return view('mypastes', ['paste'=>$paste, 'publicPaste'=>$publicPaste]);
     }
 
-    public function publicPastes()
+    public function homePastes()
     {
-        $publicPaste = paste::where('permission', '=' , 'public')->latest()->paginate(10);
-        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(10);
+        $publicPaste = Paste::where('permission', '=' , 'public')->latest()->take(10)->get();
+        $privatePaste = Paste::where('author_id', '=' , Auth::id())->latest()->take(10)->get();
         return view('home', ['publicPaste'=>$publicPaste, 'privatePaste'=>$privatePaste]);
-    }
-    public function privatePastes()
-    {
-        $privatePaste = paste::where('author_id', '=' , Auth::id())->latest()->paginate(10);
-        return view('home', compact('privatePaste'));
     }
 
 }
