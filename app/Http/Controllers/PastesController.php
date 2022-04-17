@@ -6,7 +6,7 @@ use App\Http\Requests\PasteRequest;
 use Illuminate\Support\Facades\Auth;
 use Highlight\Highlighter;
 use Redirect;
-use App\Models\paste;
+use App\Models\Paste;
 use DB;
 
 class PastesController extends Controller

@@ -1,4 +1,4 @@
-@extends('layouts.mainForLogged')
+@extends('Layouts.mainForLogged')
 
 @section('content')
     <h1>Ой, тебя здесь быть не должно</h1>

@@ -1,4 +1,4 @@
-@extends('layouts.mainForLoginAndRegister')
+@extends('Layouts.mainForLoginAndRegister')
 
 @section('title')
     Вход

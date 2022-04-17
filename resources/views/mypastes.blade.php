@@ -1,4 +1,4 @@
-@extends('layouts.mainForMyPastes')
+@extends('Layouts.mainForMyPastes')
 
 @section('title')
 Мои пасты

@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
 
-
-class paste extends Model
+class Paste extends Model
 {
     use HasFactory, Prunable;
 
@@ -34,5 +33,4 @@ class paste extends Model
     {
         return static::where('expiration_date', '<=', now());
     }
-
 }

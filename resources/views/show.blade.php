@@ -1,4 +1,4 @@
-@extends('layouts.mainForLogged')
+@extends('Layouts.mainForLogged')
 
 @section('title')
 {{$data->name}}

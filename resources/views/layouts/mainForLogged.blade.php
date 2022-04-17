@@ -11,18 +11,18 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
 </head>
 <body>
-    @include('inc.header')
+    @include('Inc.header')
     <div class="container">
         <div class="row">
             <div class="col-6">
             @yield('content')
             </div>
             <div class="col-3">
-            @include('inc.asideForPublicPastes')
+            @include('Inc.asideForPublicPastes')
             </div>
             @if(Auth::check())
             <div class="col-3">
-            @include('inc.asideForUserPastes')
+            @include('Inc.asideForUserPastes')
             </div>
             @endif
         </div>
