@@ -22,10 +22,10 @@
     @csrf
     <div class="form-group">
         <label for="name">Введите ваше имя</label>
-        <input type="name" name="name" placeholder="Имя" id="name" class="form-control"></input>
+        <input type="name" name="name" placeholder="Имя" id="name" class="form-control" value={{old('name')}}></input>
     <div class="form-group">
         <label for="email">Введите почту</label>
-        <input type="email" name="email" placeholder="email" id="email" class="form-control"></input>
+        <input type="email" name="email" placeholder="email" id="email" class="form-control" value={{old('email')}}></input>
     </div>
     <div class ="form-group row">
         <label for="password">Введите пароль: </label>

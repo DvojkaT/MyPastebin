@@ -22,7 +22,7 @@
     @csrf
     <div class="form-group">
         <label for="email">Введите почту</label>
-        <input type="email" name="email" placeholder="email" id="email" class="form-control"></input>
+        <input type="email" name="email" placeholder="email" id="email" class="form-control" value={{old('email')}}></input>
     </div>
     <div class ="form-group row">
         <label for="password">Введите пароль: </label>

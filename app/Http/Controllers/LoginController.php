@@ -19,7 +19,7 @@ class LoginController extends Controller
         }
         else
         {
-            return redirect()->back()->withErrors(['Неверные данные!']);
+            return redirect()->back()->withErrors(['Неверные данные!'])->withInput();
         }
     }
 
