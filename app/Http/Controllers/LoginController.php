@@ -10,10 +10,7 @@ use App\Http\Requests\LoginRequest;
 class LoginController extends Controller
 {
     public function authenticate(LoginRequest $req) {
-        $credentials = $req->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $credentials = $req->validated();
 
         if (Auth::attempt($credentials)) {
             $req->session()->regenerate();

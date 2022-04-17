@@ -13,11 +13,7 @@ class RegistrationController extends Controller
 
     public function store(RegisterRequest $request)
     {
-        $user = User::create(request([
-            'name',
-            'email',
-            'password'
-        ]));
+        $user = User::create($request->validated());
 
         Auth::login($user);
 
