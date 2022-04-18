@@ -48,19 +48,19 @@ class PastesController extends Controller
             return view('show', ['hcode'=>$highlighted, 'data'=>$paste, 'publicPaste'=>$publicPastes, 'privatePaste'=>$privatePastes]);
         }
         else return view('show', ['hcode'=>$paste, 'data'=>$paste, 'publicPaste'=>$publicPastes, 'privatePaste'=>$privatePastes]);
-        
+
     }
 
     public function myPastes() {
-        $publicPaste = Paste::where('permission', '=' , 'public')->latest()->take(10)->get();
+        $publicPaste = $this->service->getPublicPastes();
 
-        $paste = Paste::where('author_id', '=' , Auth::id())->latest()->paginate(10);
+        $paste = $this->service->getMyPastes(Auth::id());
         return view('mypastes', ['paste'=>$paste, 'publicPaste'=>$publicPaste]);
     }
 
     public function homePastes() {
-        $publicPaste = Paste::where('permission', '=' , 'public')->latest()->take(10)->get();
-        $privatePastes = Paste::where('author_id', '=' , Auth::id())->latest()->take(10)->get();
+        $publicPaste = $this->service->getPublicPastes();
+        $privatePastes = $this->service->getPrivatePastes(Auth::id());
         return view('home', ['publicPaste'=>$publicPaste, 'privatePaste'=>$privatePastes]);
     }
 

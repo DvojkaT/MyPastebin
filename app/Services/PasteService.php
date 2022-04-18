@@ -50,4 +50,12 @@ class PasteService implements PasteServiceInterface
         ])->take(10);
         return $privatePastes;
     }
+
+    public function getMyPastes(int $user_id): Collection
+    {
+        $myPastes = $this->repository->orderBy("created_at", 'desc')->findWhere([
+            'author_id' => $user_id
+        ])->paginate(10);
+        return $myPastes;
+    }
 }
