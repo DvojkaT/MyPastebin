@@ -4,10 +4,12 @@ namespace App\Services;
 
 use App\Models\Paste;
 use App\Repositories\Abstracts\PasteRepository;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Services\Abstracts\PasteServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class PasteService implements PasteServiceInterface
@@ -49,5 +51,33 @@ class PasteService implements PasteServiceInterface
     public function getMyPastes(int $user_id): LengthAwarePaginator
     {
         return $this->repository->filter($user_id,null, true);
+    }
+
+    public function createPaste(array $fields, int $user_id): Paste
+    {
+        return $this->repository->create([
+            'code' => $fields['code'],
+            'name' => $fields['pastename'],
+            'hash' => Uuid::uuid4()->toString(),
+            'author_id' => $user_id,
+            'permission' => $fields['permission'],
+            'expiration_date' => Carbon::now()->addMinutes($fields['expiration_date']),
+            'language' => $fields['language'],
+        ]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

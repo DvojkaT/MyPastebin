@@ -6,5 +6,5 @@ use App\Models\User;
 
 interface UserServiceInterface
 {
-    public function CreateUser(array $fields): User;
+    public function CreateUser(array $fields, int $user_id): User;
 }

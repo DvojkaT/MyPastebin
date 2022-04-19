@@ -21,7 +21,7 @@ class PastesController extends Controller
 
     public function post(PasteRequest $request)
     {
-        $paste = Paste::createNew($request);
+        $paste = $this->service->createPaste($request->toArray(), Auth::id());
         return redirect()->route('show', $paste->hash);
     }
 

@@ -14,6 +14,8 @@ class Paste extends Model
 {
     use HasFactory, Prunable;
 
+    protected $guarded = [];
+
     public static function createNew(Request $request)
     {
         $paste = new paste;
