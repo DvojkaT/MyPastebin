@@ -21,7 +21,7 @@ class PastesController extends Controller
 
     public function post(PasteRequest $request)
     {
-        $paste = paste::createNew($request);
+        $paste = Paste::createNew($request);
         return redirect()->route('show', $paste->hash);
     }
 
@@ -37,8 +37,7 @@ class PastesController extends Controller
             return view('home', ['publicPaste'=>$publicPastes, 'privatePaste'=>$privatePastes])->withErrors(['Паста на которую вы пытались зайти приватная']);
         }
 
-        if ($paste->language != "")
-        {
+        if ($paste->language != "") {
             $highlighter = new highlighter();
             $highlighted = $highlighter->highlight($paste->language, $paste->code);
             $paste->code = "";
@@ -51,17 +50,18 @@ class PastesController extends Controller
 
     }
 
-    public function myPastes() {
-        $publicPaste = $this->service->getPublicPastes();
-
+    public function myPastes()
+    {
+        $publicPastes = $this->service->getPublicPastes();
         $paste = $this->service->getMyPastes(Auth::id());
-        return view('mypastes', ['paste'=>$paste, 'publicPaste'=>$publicPaste]);
+        return view('mypastes', ['paste'=>$paste, 'publicPaste'=>$publicPastes]);
     }
 
-    public function homePastes() {
-        $publicPaste = $this->service->getPublicPastes();
+    public function homePastes()
+    {
+        $publicPastes = $this->service->getPublicPastes();
         $privatePastes = $this->service->getPrivatePastes(Auth::id());
-        return view('home', ['publicPaste'=>$publicPaste, 'privatePaste'=>$privatePastes]);
+        return view('home', ['publicPaste'=>$publicPastes, 'privatePaste'=>$privatePastes]);
     }
 
 }

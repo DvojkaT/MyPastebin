@@ -7,6 +7,7 @@ use App\Repositories\Abstracts\PasteRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Services\Abstracts\PasteServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class PasteService implements PasteServiceInterface
@@ -37,25 +38,16 @@ class PasteService implements PasteServiceInterface
 
     public function getPublicPastes(): Collection
     {
-        $publicPastes = $this->repository->orderBy("created_at", 'desc')->findWhere([
-            'permission' => 'public'
-        ])->take(10);
-        return $publicPastes;
+        return $this->repository->filter(null,'public');
     }
 
     public function getPrivatePastes(?int $user_id): Collection
     {
-        $privatePastes = $this->repository->orderBy("created_at", 'desc')->findWhere([
-            'author_id' => $user_id
-        ])->take(10);
-        return $privatePastes;
+        return $this->repository->filter($user_id);
     }
 
-    public function getMyPastes(int $user_id): Collection
+    public function getMyPastes(int $user_id): LengthAwarePaginator
     {
-        $myPastes = $this->repository->orderBy("created_at", 'desc')->findWhere([
-            'author_id' => $user_id
-        ])->paginate(10);
-        return $myPastes;
+        return $this->repository->filter($user_id,null, true);
     }
 }
