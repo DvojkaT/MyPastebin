@@ -64,20 +64,5 @@ class PasteService implements PasteServiceInterface
             'expiration_date' => Carbon::now()->addMinutes($fields['expiration_date']),
             'language' => $fields['language'],
         ]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
